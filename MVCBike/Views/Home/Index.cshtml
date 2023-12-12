@@ -1,0 +1,12 @@
+﻿@model List<Bike>
+
+<h2>Bike Ratings</h2>
+
+<ul>
+    @foreach (var bike in Model)
+    {
+        <li>@bike.Brand @bike.Model - Rating: @bike.Rating</li>
+    }
+</ul>
+
+<a asp-action="Add">Add a Bike</a>
