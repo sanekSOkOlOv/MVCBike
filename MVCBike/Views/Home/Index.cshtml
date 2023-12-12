@@ -1,19 +1,25 @@
 ﻿@model List<Bike>
 
-<h2>Bike Ratings</h2>
+<div class="container mt-4">
+    <h2 class="text-center">Bike Ratings</h2>
 
-<ul>
-    <ul>
+    <ul class="list-unstyled mx-auto">
         @foreach (var bike in Model)
         {
-            <li>
-                @bike.Brand @bike.Model - Rating: @bike.Rating
-                <form asp-action="Delete" asp-route-id="@bike.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this bike?');">
-                    <button type="submit">Delete</button>
-                </form>
+            <li class="mb-3 row">
+                <div class="col">
+                    @bike.Brand @bike.Model - Rating: @bike.Rating
+                </div>
+                <div class="col-auto">
+                    <form asp-action="Delete" asp-route-id="@bike.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this bike?');" class="d-inline-block ml-2">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
             </li>
         }
     </ul>
-</ul>
 
-<a asp-action="Add">Add a Bike</a>
+    <div class="text-center">
+        <a asp-action="Add" class="btn btn-primary">Add a Bike</a>
+    </div>
+</div>

@@ -2,6 +2,7 @@ html {
   font-size: 14px;
 }
 
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -11,6 +12,11 @@ html {
 html {
   position: relative;
   min-height: 100%;
+}
+
+.header {
+    background-color: #85DCBA; /* Основной цвет хедера */
+    color: #333; /* Цвет текста в хедере */
 }
 
 body {
