@@ -1,0 +1,21 @@
+﻿@model MVCBike.Models.Scooter
+
+<h2>Add a Scooter</h2>
+
+<form asp-action="AddScooter" method="post">
+    <div>
+        <label asp-for="Brand">Brand:</label>
+        <input asp-for="Brand" />
+    </div>
+    <div>
+        <label asp-for="Model">Model:</label>
+        <input asp-for="Model" />
+    </div>
+    <div>
+        <label asp-for="Rating">Rating:</label>
+        <input asp-for="Rating" type="number" />
+    </div>
+    <button type="submit">Add Scooter</button>
+</form>
+
+<a asp-action="Scooters">Back to Scooters</a>

@@ -9,6 +9,7 @@ namespace MVCBike.Controllers
     public class HomeController : Controller
     {
         private const string FilePath = "bikes.json";
+        private const string ScootersFilePath = "scooters.json";
 
         public IActionResult Index()
         {
@@ -63,6 +64,60 @@ namespace MVCBike.Controllers
         {
             string json = JsonSerializer.Serialize(bikes);
             System.IO.File.WriteAllText(FilePath, json);
+        }
+
+        public IActionResult Scooters()
+        {
+            List<Scooter> scooters = LoadScooters();
+            return View(scooters);
+        }
+
+        [HttpGet]
+        public IActionResult AddScooter()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddScooter(Scooter scooter)
+        {
+            List<Scooter> scooters = LoadScooters();
+            scooter.Id = scooters.Count + 1;
+            scooters.Add(scooter);
+            SaveScooters(scooters);
+
+            return RedirectToAction("Scooters");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteScooter(int id)
+        {
+            List<Scooter> scooters = LoadScooters();
+            var scooterToRemove = scooters.FirstOrDefault(s => s.Id == id);
+
+            if (scooterToRemove != null)
+            {
+                scooters.Remove(scooterToRemove);
+                SaveScooters(scooters);
+            }
+
+            return RedirectToAction("Scooters");
+        }
+
+        private List<Scooter> LoadScooters()
+        {
+            if (System.IO.File.Exists(ScootersFilePath))
+            {
+                string json = System.IO.File.ReadAllText(ScootersFilePath);
+                return JsonSerializer.Deserialize<List<Scooter>>(json);
+            }
+            return new List<Scooter>();
+        }
+
+        private void SaveScooters(List<Scooter> scooters)
+        {
+            string json = JsonSerializer.Serialize(scooters);
+            System.IO.File.WriteAllText(ScootersFilePath, json);
         }
     }
 }

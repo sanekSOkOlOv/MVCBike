@@ -18,7 +18,6 @@ body {
     background-color: #85DCBA
 }
 
-/* wwwroot/css/site.css */
 
 h2 {
     font-family: 'Arial', sans-serif;
@@ -61,7 +60,7 @@ button:hover {
  }
 
 li {
-    margin-bottom: 8px;
+    margin-bottom: 15px;
     font-family: 'Arial', sans-serif;
 }
 
@@ -76,6 +75,28 @@ a {
     transition: background-color 0.3s;
 }
 
-    a:hover {
-        background-color: #45a049;
-    }
+a:hover {
+    background-color: #45a049;
+}
+
+.page-links {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.page-links li {
+    margin-left: 10px;
+}
+
+.page-links a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.page-links a:hover {
+    text-decoration: underline;
+}
