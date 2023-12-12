@@ -33,6 +33,22 @@ namespace MVCBike.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            List<Bike> bikes = LoadBikes();
+            var bikeToRemove = bikes.FirstOrDefault(b => b.Id == id);
+
+            if (bikeToRemove != null)
+            {
+                bikes.Remove(bikeToRemove);
+                SaveBikes(bikes);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
         private List<Bike> LoadBikes()
         {
             if (System.IO.File.Exists(FilePath))
