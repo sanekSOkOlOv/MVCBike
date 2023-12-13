@@ -1,4 +1,7 @@
 ﻿@model List<Skateboard>
+@using MVCBike.Helpers
+
+
 
 <div class="container mt-4">
     <h2 class="text-center">Skateboard Ratings</h2>
@@ -8,7 +11,7 @@
         {
             <li class="mb-3 row">
                 <div class="col">
-                    @skateboard.Brand @skateboard.Model - Rating: @skateboard.Rating
+                    @skateboard.Brand @UpperHelper.FormatModelAsUpperCase(skateboard.Model) - Rating: @skateboard.Rating
                 </div>
                 <div class="col-auto">
                     <form asp-action="DeleteSkateboard" asp-route-id="@skateboard.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this skateboard?');">
