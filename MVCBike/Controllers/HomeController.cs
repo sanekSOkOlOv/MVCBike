@@ -10,7 +10,7 @@ namespace MVCBike.Controllers
     {
         private const string FilePath = "bikes.json";
         private const string ScootersFilePath = "scooters.json";
-
+        private const string SkatePath = "skate.json";
         public IActionResult Index()
         {
             List<Bike> bikes = LoadBikes();
@@ -118,6 +118,60 @@ namespace MVCBike.Controllers
         {
             string json = JsonSerializer.Serialize(scooters);
             System.IO.File.WriteAllText(ScootersFilePath, json);
+        }
+
+        public IActionResult Skateboards()
+        {
+            List<Skateboard> skateboards = LoadSkateboards();
+            return View("Skateboards", skateboards);
+        }
+
+        [HttpGet]
+        public IActionResult AddSkateboard()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddSkateboard(Skateboard skateboard)
+        {
+            List<Skateboard> skateboards = LoadSkateboards();
+            skateboard.Id = skateboards.Count + 1;
+            skateboards.Add(skateboard);
+            SaveSkateboards(skateboards);
+
+            return RedirectToAction("Skateboards");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteSkateboard(int id)
+        {
+            List<Skateboard> skateboards = LoadSkateboards();
+            var skateboardToRemove = skateboards.FirstOrDefault(s => s.Id == id);
+
+            if (skateboardToRemove != null)
+            {
+                skateboards.Remove(skateboardToRemove);
+                SaveSkateboards(skateboards);
+            }
+
+            return RedirectToAction("Skateboards");
+        }
+
+        private List<Skateboard> LoadSkateboards()
+        {
+            if (System.IO.File.Exists(SkatePath))
+            {
+                string json = System.IO.File.ReadAllText(SkatePath);
+                return JsonSerializer.Deserialize<List<Skateboard>>(json);
+            }
+            return new List<Skateboard>();
+        }
+
+        private void SaveSkateboards(List<Skateboard> skateboards)
+        {
+            string json = JsonSerializer.Serialize(skateboards);
+            System.IO.File.WriteAllText(SkatePath, json);
         }
     }
 }

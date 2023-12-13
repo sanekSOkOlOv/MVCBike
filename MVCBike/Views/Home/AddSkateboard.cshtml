@@ -1,0 +1,21 @@
+﻿@model MVCBike.Models.Skateboard
+
+<h2>Add a Skateboard</h2>
+
+<form asp-action="AddSkateboard" method="post">
+    <div>
+        <label asp-for="Brand">Brand:</label>
+        <input asp-for="Brand" />
+    </div>
+    <div>
+        <label asp-for="Model">Model:</label>
+        <input asp-for="Model" />
+    </div>
+    <div>
+        <label asp-for="Rating">Rating:</label>
+        <input asp-for="Rating" type="number" />
+    </div>
+    <button type="submit">Add Skateboard</button>
+</form>
+
+<a asp-action="Skateboards">Back to Skateboard</a>
