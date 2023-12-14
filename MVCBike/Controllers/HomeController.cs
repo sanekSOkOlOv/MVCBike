@@ -3,6 +3,7 @@ using MVCBike.Models;
 using System.Diagnostics;
 using System.Text.Json;
 using System.IO;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 namespace MVCBike.Controllers
 {
@@ -14,6 +15,7 @@ namespace MVCBike.Controllers
         public IActionResult Index()
         {
             List<Bike> bikes = LoadBikes();
+            bikes = bikes.OrderByDescending(b => b.Rating).ToList();
             return View(bikes);
         }
 
@@ -69,6 +71,7 @@ namespace MVCBike.Controllers
         public IActionResult Scooters()
         {
             List<Scooter> scooters = LoadScooters();
+            scooters = scooters.OrderByDescending(b => b.Rating).ToList();
             return View(scooters);
         }
 
@@ -123,6 +126,7 @@ namespace MVCBike.Controllers
         public IActionResult Skateboards()
         {
             List<Skateboard> skateboards = LoadSkateboards();
+            skateboards = skateboards.OrderByDescending(b => b.Rating).ToList();
             return View("Skateboards", skateboards);
         }
 
